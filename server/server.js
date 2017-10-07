@@ -15,6 +15,18 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) => { // to rigester connection listener
     console.log('New user is connected');
 
+    socket.emit('newMessage', {
+        from: 'Sheyar',
+        text: 'Hey, you got a new message',
+        cearteAt: new Date()
+
+    });
+
+    socket.on('createMessage', (message) => {
+        console.log('The created message', message);
+    });
+
+
     socket.on('disconnect', () => {
         console.log('User is disconnected');
     });
