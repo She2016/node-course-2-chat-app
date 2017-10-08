@@ -3,6 +3,7 @@ const http = require('http'); // express uses https, but to add socket.io to the
 const express = require('express');
 const socketIO = require('socket.io');//this library has frontend and backend
 
+const {generateMessage} = require('./utils/message.js');
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000; //for heroku to set the port or default one 3000
 var app = express();
@@ -16,24 +17,15 @@ io.on('connection', (socket) => { // to rigester connection listener
     console.log('New user is connected');
 
 
-    socket.emit('welcomeMessage', { 
-        from: 'Admin',
-        text: 'Welcome to the chat app'
-    });
+    socket.emit('welcomeMessage', generateMessage('Admin', 'Welcome to the chat app'));
+        
 
-    socket.broadcast.emit('joinMessage', {
-        from: 'Admin',
-        text: 'New user joined'
-    });
+    socket.broadcast.emit('joinMessage',  generateMessage('Admin', 'New user joined'));
 
 
     socket.on('createMessage', (message) => {
         console.log('The created message', message);
-        io.emit('newMessage', {
-            from:message.from,
-            text: message.text,
-            creatAt: new Date().getTime()
-        });
+        io.emit('newMessage',  generateMessage(message.from, message.text));
     });
 
 
