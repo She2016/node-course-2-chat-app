@@ -4,12 +4,12 @@ var socket = io();
             console.log('Connected to the server');
 
 
-            socket.on('welcomeMessage', function(welcomeMessage) {
-                console.log(welcomMessage);
+            socket.on('welcomeMessage', function(wlcmMessage) {// i fixed the message
+                console.log(wlcmMessage);
             });
         });
 
-        socket.on('joinMessage', function(jionMessage) {
+        socket.on('joinMessage', function(joinMessage) {
             console.log(joinMessage);
         });
     

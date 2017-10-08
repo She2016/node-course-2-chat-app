@@ -16,7 +16,7 @@ io.on('connection', (socket) => { // to rigester connection listener
     console.log('New user is connected');
 
 
-    socket.emit('welcomeMessage', {
+    socket.emit('welcomeMessage', { 
         from: 'Admin',
         text: 'Welcome to the chat app'
     });
