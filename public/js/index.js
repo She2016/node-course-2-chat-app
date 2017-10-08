@@ -4,12 +4,14 @@ var socket = io();
             console.log('Connected to the server');
 
 
-            socket.emit('createMessage', {
-                from: 'Sheyar',
-                text: 'This is a new message'   
+            socket.on('welcomeMessage', function(welcomeMessage) {
+                console.log(welcomMessage);
             });
         });
 
+        socket.on('joinMessage', function(jionMessage) {
+            console.log(joinMessage);
+        });
     
         socket.on('newMessage', function(message) {
             console.log('The new message', message);
