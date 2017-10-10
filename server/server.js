@@ -17,10 +17,10 @@ io.on('connection', (socket) => { // to rigester connection listener
     console.log('New user is connected');
 
 
-    socket.emit('welcomeMessage', generateMessage('Admin', 'Welcome to the chat app'));
+    socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));// when the user connect to the server he gets this message
         
 
-    socket.broadcast.emit('joinMessage',  generateMessage('Admin', 'New user joined'));
+    socket.broadcast.emit('newMessage',  generateMessage('Admin', 'New user joined'));//emit to all connection expect the sender
 
 
     socket.on('createMessage', (message) => {
